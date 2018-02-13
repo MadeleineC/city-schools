@@ -1,4 +1,4 @@
-#Trends
+Trends
 
 ```python
 #TRENDS
