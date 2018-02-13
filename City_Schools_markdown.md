@@ -195,7 +195,7 @@ student_df.head()
 
 
 
-
+District Summary
 ```python
 #Create a high level snapshot (in table form) of the district's key metrics:
 #Total Schools
@@ -293,7 +293,7 @@ district_summary_df
 
 
 
-
+School Summary
 ```python
 # School Summary
 students_grouped = student_df.groupby(["school"])
@@ -651,7 +651,7 @@ school_df_with_scores
 
 
 
-
+TOP 5 Performers
 ```python
 #Top 5 Performers
 schools_sorted_by_pass_rate = school_df_with_scores.sort_values("Overall Pass Rate", ascending=False)
@@ -781,7 +781,7 @@ schools_sorted_by_pass_rate.head(5)
 
 
 
-
+Bottom 5 Performers
 ```python
 #Bottom 5 Performers
 schools_sorted_by_pass_rate = school_df_with_scores.sort_values("Overall Pass Rate", ascending=True)
@@ -911,7 +911,7 @@ schools_sorted_by_pass_rate.head(5)
 
 
 
-
+Math Scores by Grade
 ```python
 #Avg Math Pass Rates by School and Grade
 students_grouped_by_grade = student_df.groupby(["school","grade"], as_index=False)
@@ -1070,7 +1070,7 @@ math_table.round(2)
 </div>
 
 
-
+Reading Scores by Grade
 
 ```python
 #Avg Reading Pass Rates by School and Grade
@@ -1230,7 +1230,7 @@ reading_table.round(2)
 </div>
 
 
-
+Scores by School Spending
 
 ```python
 # Scores by School Spending
@@ -1354,7 +1354,7 @@ Scores_by_pp_spending_df
 </div>
 
 
-
+Scores by School Size
 
 ```python
 # Scores by School Size
@@ -1461,7 +1461,7 @@ Scores_by_size
 </div>
 
 
-
+Scores by School Type
 
 ```python
 
