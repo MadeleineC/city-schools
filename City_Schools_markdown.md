@@ -209,9 +209,11 @@ avg_math = student_df["math_score"].mean()
 #Average Reading Score
 avg_reading = student_df["reading_score"].mean()
 #% Passing Math
-percent_passing_math = len(student_df.loc[student_df["math_score"] >= 70])/total_students*100
+percent_passing_math = student_df.loc[student_df["math_score"] > 70].count()["Student ID"]/float(total_students)*100
+#total_passing_math = student_df.loc[student_df["math_score"] > 70]
+#percent_passing_math = len(student_df.loc[student_df["math_score"] >= 70])/total_students*100
 #% Passing Reading
-percent_passing_reading = len(student_df.loc[student_df["reading_score"] >= 70])/total_students*100
+percent_passing_reading = len(student_df.loc[student_df["reading_score"] > 70])/total_students*100
 #Overall Passing Rate (Average of the above two)
 overall_passing_rate = (percent_passing_math+percent_passing_reading)/2
 
@@ -280,10 +282,10 @@ district_summary_df
       <td>39170</td>
       <td>$ 24,649,428.00</td>
       <td>78.99</td>
-      <td>74.98%</td>
+      <td>72.39%</td>
       <td>81.88</td>
-      <td>85.81%</td>
-      <td>80.39%</td>
+      <td>82.97%</td>
+      <td>77.68%</td>
     </tr>
   </tbody>
 </table>
@@ -312,11 +314,11 @@ avg_reading_score_list_by_school = students_grouped["reading_score"].mean()
 new_school_df["Avg Reading Score"] = avg_reading_score_list_by_school
 
 #Count of Students Passing
-students_passing_reading = student_df.loc[student_df["reading_score"] >= 70]
+students_passing_reading = student_df.loc[student_df["reading_score"] > 70]
 students_passing_reading_groupby_school = students_passing_reading.groupby(["school"]).count()
 new_school_df["Ss Passing reading"] = students_passing_reading_groupby_school["Student ID"]
 
-students_passing_math = student_df.loc[student_df["math_score"] >= 70]
+students_passing_math = student_df.loc[student_df["math_score"] > 70]
 students_passing_math_groupby_school = students_passing_math.groupby(["school"]).count()
 new_school_df["Ss Passing Math"] = students_passing_math_groupby_school["Student ID"]
 
@@ -412,12 +414,12 @@ school_df_with_scores
       <td>$ 1,910,635</td>
       <td>$ 655</td>
       <td>76.63</td>
-      <td>1916</td>
-      <td>65.68%</td>
+      <td>1847</td>
+      <td>63.32%</td>
       <td>81.18</td>
-      <td>2372</td>
-      <td>81.32%</td>
-      <td>73.50%</td>
+      <td>2299</td>
+      <td>78.81%</td>
+      <td>71.07%</td>
     </tr>
     <tr>
       <th>1</th>
@@ -428,12 +430,12 @@ school_df_with_scores
       <td>$ 1,884,411</td>
       <td>$ 639</td>
       <td>76.71</td>
-      <td>1946</td>
-      <td>65.99%</td>
+      <td>1880</td>
+      <td>63.75%</td>
       <td>81.16</td>
-      <td>2381</td>
-      <td>80.74%</td>
-      <td>73.36%</td>
+      <td>2313</td>
+      <td>78.43%</td>
+      <td>71.09%</td>
     </tr>
     <tr>
       <th>2</th>
@@ -444,12 +446,12 @@ school_df_with_scores
       <td>$ 1,056,600</td>
       <td>$ 600</td>
       <td>83.36</td>
-      <td>1653</td>
-      <td>93.87%</td>
+      <td>1583</td>
+      <td>89.89%</td>
       <td>83.73</td>
-      <td>1688</td>
-      <td>95.85%</td>
-      <td>94.86%</td>
+      <td>1631</td>
+      <td>92.62%</td>
+      <td>91.25%</td>
     </tr>
     <tr>
       <th>3</th>
@@ -460,12 +462,12 @@ school_df_with_scores
       <td>$ 3,022,020</td>
       <td>$ 652</td>
       <td>77.29</td>
-      <td>3094</td>
-      <td>66.75%</td>
+      <td>3001</td>
+      <td>64.75%</td>
       <td>80.93</td>
-      <td>3748</td>
-      <td>80.86%</td>
-      <td>73.81%</td>
+      <td>3624</td>
+      <td>78.19%</td>
+      <td>71.47%</td>
     </tr>
     <tr>
       <th>4</th>
@@ -476,12 +478,12 @@ school_df_with_scores
       <td>$ 917,500</td>
       <td>$ 625</td>
       <td>83.35</td>
+      <td>1317</td>
+      <td>89.71%</td>
+      <td>83.82</td>
       <td>1371</td>
       <td>93.39%</td>
-      <td>83.82</td>
-      <td>1426</td>
-      <td>97.14%</td>
-      <td>95.27%</td>
+      <td>91.55%</td>
     </tr>
     <tr>
       <th>5</th>
@@ -492,12 +494,12 @@ school_df_with_scores
       <td>$ 1,319,574</td>
       <td>$ 578</td>
       <td>83.27</td>
-      <td>2143</td>
-      <td>93.87%</td>
+      <td>2076</td>
+      <td>90.93%</td>
       <td>83.99</td>
-      <td>2204</td>
-      <td>96.54%</td>
-      <td>95.20%</td>
+      <td>2129</td>
+      <td>93.25%</td>
+      <td>92.09%</td>
     </tr>
     <tr>
       <th>6</th>
@@ -508,12 +510,12 @@ school_df_with_scores
       <td>$ 1,081,356</td>
       <td>$ 582</td>
       <td>83.06</td>
-      <td>1749</td>
-      <td>94.13%</td>
+      <td>1664</td>
+      <td>89.56%</td>
       <td>83.98</td>
-      <td>1803</td>
-      <td>97.04%</td>
-      <td>95.59%</td>
+      <td>1744</td>
+      <td>93.86%</td>
+      <td>91.71%</td>
     </tr>
     <tr>
       <th>7</th>
@@ -524,12 +526,12 @@ school_df_with_scores
       <td>$ 3,124,928</td>
       <td>$ 628</td>
       <td>77.05</td>
-      <td>3318</td>
-      <td>66.68%</td>
+      <td>3216</td>
+      <td>64.63%</td>
       <td>81.03</td>
-      <td>4077</td>
-      <td>81.93%</td>
-      <td>74.31%</td>
+      <td>3946</td>
+      <td>79.30%</td>
+      <td>71.97%</td>
     </tr>
     <tr>
       <th>8</th>
@@ -540,12 +542,12 @@ school_df_with_scores
       <td>$ 248,087</td>
       <td>$ 581</td>
       <td>83.80</td>
-      <td>395</td>
-      <td>92.51%</td>
+      <td>387</td>
+      <td>90.63%</td>
       <td>83.81</td>
-      <td>411</td>
-      <td>96.25%</td>
-      <td>94.38%</td>
+      <td>396</td>
+      <td>92.74%</td>
+      <td>91.69%</td>
     </tr>
     <tr>
       <th>9</th>
@@ -556,12 +558,12 @@ school_df_with_scores
       <td>$ 585,858</td>
       <td>$ 609</td>
       <td>83.84</td>
-      <td>910</td>
-      <td>94.59%</td>
+      <td>882</td>
+      <td>91.68%</td>
       <td>84.04</td>
-      <td>923</td>
-      <td>95.95%</td>
-      <td>95.27%</td>
+      <td>887</td>
+      <td>92.20%</td>
+      <td>91.94%</td>
     </tr>
     <tr>
       <th>10</th>
@@ -572,12 +574,12 @@ school_df_with_scores
       <td>$ 1,049,400</td>
       <td>$ 583</td>
       <td>83.68</td>
-      <td>1680</td>
-      <td>93.33%</td>
+      <td>1625</td>
+      <td>90.28%</td>
       <td>83.95</td>
-      <td>1739</td>
-      <td>96.61%</td>
-      <td>94.97%</td>
+      <td>1682</td>
+      <td>93.44%</td>
+      <td>91.86%</td>
     </tr>
     <tr>
       <th>11</th>
@@ -588,12 +590,12 @@ school_df_with_scores
       <td>$ 2,547,363</td>
       <td>$ 637</td>
       <td>76.84</td>
-      <td>2654</td>
-      <td>66.37%</td>
+      <td>2562</td>
+      <td>64.07%</td>
       <td>80.74</td>
-      <td>3208</td>
-      <td>80.22%</td>
-      <td>73.29%</td>
+      <td>3109</td>
+      <td>77.74%</td>
+      <td>70.91%</td>
     </tr>
     <tr>
       <th>12</th>
@@ -604,12 +606,12 @@ school_df_with_scores
       <td>$ 3,094,650</td>
       <td>$ 650</td>
       <td>77.07</td>
-      <td>3145</td>
-      <td>66.06%</td>
+      <td>3040</td>
+      <td>63.85%</td>
       <td>80.97</td>
-      <td>3867</td>
-      <td>81.22%</td>
-      <td>73.64%</td>
+      <td>3727</td>
+      <td>78.28%</td>
+      <td>71.07%</td>
     </tr>
     <tr>
       <th>13</th>
@@ -620,12 +622,12 @@ school_df_with_scores
       <td>$ 1,763,916</td>
       <td>$ 644</td>
       <td>77.10</td>
-      <td>1871</td>
-      <td>68.31%</td>
+      <td>1801</td>
+      <td>65.75%</td>
       <td>80.75</td>
-      <td>2172</td>
-      <td>79.30%</td>
-      <td>73.80%</td>
+      <td>2123</td>
+      <td>77.51%</td>
+      <td>71.63%</td>
     </tr>
     <tr>
       <th>14</th>
@@ -636,12 +638,12 @@ school_df_with_scores
       <td>$ 1,043,130</td>
       <td>$ 638</td>
       <td>83.42</td>
-      <td>1525</td>
-      <td>93.27%</td>
+      <td>1475</td>
+      <td>90.21%</td>
       <td>83.85</td>
-      <td>1591</td>
-      <td>97.31%</td>
-      <td>95.29%</td>
+      <td>1519</td>
+      <td>92.91%</td>
+      <td>91.56%</td>
     </tr>
   </tbody>
 </table>
@@ -694,52 +696,20 @@ schools_sorted_by_pass_rate.head(5)
   </thead>
   <tbody>
     <tr>
-      <th>6</th>
-      <td>6</td>
-      <td>Cabrera High School</td>
+      <th>5</th>
+      <td>5</td>
+      <td>Wilson High School</td>
       <td>Charter</td>
-      <td>1858</td>
-      <td>$ 1,081,356</td>
-      <td>$ 582</td>
-      <td>83.06</td>
-      <td>1749</td>
-      <td>94.13%</td>
-      <td>83.98</td>
-      <td>1803</td>
-      <td>97.04%</td>
-      <td>95.59%</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>14</td>
-      <td>Thomas High School</td>
-      <td>Charter</td>
-      <td>1635</td>
-      <td>$ 1,043,130</td>
-      <td>$ 638</td>
-      <td>83.42</td>
-      <td>1525</td>
-      <td>93.27%</td>
-      <td>83.85</td>
-      <td>1591</td>
-      <td>97.31%</td>
-      <td>95.29%</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>Griffin High School</td>
-      <td>Charter</td>
-      <td>1468</td>
-      <td>$ 917,500</td>
-      <td>$ 625</td>
-      <td>83.35</td>
-      <td>1371</td>
-      <td>93.39%</td>
-      <td>83.82</td>
-      <td>1426</td>
-      <td>97.14%</td>
-      <td>95.27%</td>
+      <td>2283</td>
+      <td>$ 1,319,574</td>
+      <td>$ 578</td>
+      <td>83.27</td>
+      <td>2076</td>
+      <td>90.93%</td>
+      <td>83.99</td>
+      <td>2129</td>
+      <td>93.25%</td>
+      <td>92.09%</td>
     </tr>
     <tr>
       <th>9</th>
@@ -750,28 +720,60 @@ schools_sorted_by_pass_rate.head(5)
       <td>$ 585,858</td>
       <td>$ 609</td>
       <td>83.84</td>
-      <td>910</td>
-      <td>94.59%</td>
+      <td>882</td>
+      <td>91.68%</td>
       <td>84.04</td>
-      <td>923</td>
-      <td>95.95%</td>
-      <td>95.27%</td>
+      <td>887</td>
+      <td>92.20%</td>
+      <td>91.94%</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>5</td>
-      <td>Wilson High School</td>
+      <th>10</th>
+      <td>10</td>
+      <td>Wright High School</td>
       <td>Charter</td>
-      <td>2283</td>
-      <td>$ 1,319,574</td>
-      <td>$ 578</td>
-      <td>83.27</td>
-      <td>2143</td>
-      <td>93.87%</td>
-      <td>83.99</td>
-      <td>2204</td>
-      <td>96.54%</td>
-      <td>95.20%</td>
+      <td>1800</td>
+      <td>$ 1,049,400</td>
+      <td>$ 583</td>
+      <td>83.68</td>
+      <td>1625</td>
+      <td>90.28%</td>
+      <td>83.95</td>
+      <td>1682</td>
+      <td>93.44%</td>
+      <td>91.86%</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>Cabrera High School</td>
+      <td>Charter</td>
+      <td>1858</td>
+      <td>$ 1,081,356</td>
+      <td>$ 582</td>
+      <td>83.06</td>
+      <td>1664</td>
+      <td>89.56%</td>
+      <td>83.98</td>
+      <td>1744</td>
+      <td>93.86%</td>
+      <td>91.71%</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8</td>
+      <td>Holden High School</td>
+      <td>Charter</td>
+      <td>427</td>
+      <td>$ 248,087</td>
+      <td>$ 581</td>
+      <td>83.80</td>
+      <td>387</td>
+      <td>90.63%</td>
+      <td>83.81</td>
+      <td>396</td>
+      <td>92.74%</td>
+      <td>91.69%</td>
     </tr>
   </tbody>
 </table>
@@ -832,28 +834,12 @@ schools_sorted_by_pass_rate.head(5)
       <td>$ 2,547,363</td>
       <td>$ 637</td>
       <td>76.84</td>
-      <td>2654</td>
-      <td>66.37%</td>
+      <td>2562</td>
+      <td>64.07%</td>
       <td>80.74</td>
-      <td>3208</td>
-      <td>80.22%</td>
-      <td>73.29%</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>Figueroa High School</td>
-      <td>District</td>
-      <td>2949</td>
-      <td>$ 1,884,411</td>
-      <td>$ 639</td>
-      <td>76.71</td>
-      <td>1946</td>
-      <td>65.99%</td>
-      <td>81.16</td>
-      <td>2381</td>
-      <td>80.74%</td>
-      <td>73.36%</td>
+      <td>3109</td>
+      <td>77.74%</td>
+      <td>70.91%</td>
     </tr>
     <tr>
       <th>0</th>
@@ -864,12 +850,12 @@ schools_sorted_by_pass_rate.head(5)
       <td>$ 1,910,635</td>
       <td>$ 655</td>
       <td>76.63</td>
-      <td>1916</td>
-      <td>65.68%</td>
+      <td>1847</td>
+      <td>63.32%</td>
       <td>81.18</td>
-      <td>2372</td>
-      <td>81.32%</td>
-      <td>73.50%</td>
+      <td>2299</td>
+      <td>78.81%</td>
+      <td>71.07%</td>
     </tr>
     <tr>
       <th>12</th>
@@ -880,28 +866,44 @@ schools_sorted_by_pass_rate.head(5)
       <td>$ 3,094,650</td>
       <td>$ 650</td>
       <td>77.07</td>
-      <td>3145</td>
-      <td>66.06%</td>
+      <td>3040</td>
+      <td>63.85%</td>
       <td>80.97</td>
-      <td>3867</td>
-      <td>81.22%</td>
-      <td>73.64%</td>
+      <td>3727</td>
+      <td>78.28%</td>
+      <td>71.07%</td>
     </tr>
     <tr>
-      <th>13</th>
-      <td>13</td>
-      <td>Ford High School</td>
+      <th>1</th>
+      <td>1</td>
+      <td>Figueroa High School</td>
       <td>District</td>
-      <td>2739</td>
-      <td>$ 1,763,916</td>
-      <td>$ 644</td>
-      <td>77.10</td>
-      <td>1871</td>
-      <td>68.31%</td>
-      <td>80.75</td>
-      <td>2172</td>
-      <td>79.30%</td>
-      <td>73.80%</td>
+      <td>2949</td>
+      <td>$ 1,884,411</td>
+      <td>$ 639</td>
+      <td>76.71</td>
+      <td>1880</td>
+      <td>63.75%</td>
+      <td>81.16</td>
+      <td>2313</td>
+      <td>78.43%</td>
+      <td>71.09%</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Hernandez High School</td>
+      <td>District</td>
+      <td>4635</td>
+      <td>$ 3,022,020</td>
+      <td>$ 652</td>
+      <td>77.29</td>
+      <td>3001</td>
+      <td>64.75%</td>
+      <td>80.93</td>
+      <td>3624</td>
+      <td>78.19%</td>
+      <td>71.47%</td>
     </tr>
   </tbody>
 </table>
@@ -1256,13 +1258,13 @@ grouped_students_by_spending = merged_df2.groupby(["Per Pupil Spending"])
 
 Scores_by_pp_spending_df["Average Reading Score"] = grouped_students_by_spending["reading_score"].mean()
 
-SS_passing_reading_pp_spending = merged_df2.loc[merged_df2["reading_score"] >= 70]
+SS_passing_reading_pp_spending = merged_df2.loc[merged_df2["reading_score"] > 70]
 grouped_Ss_passing_reading_pp_spending = SS_passing_reading_pp_spending.groupby(["Per Pupil Spending"])
 Scores_by_pp_spending_df["% passing reading"] = grouped_Ss_passing_reading_pp_spending["Student ID"].count()/grouped_students_by_spending["Student ID"].count()*100
 
 Scores_by_pp_spending_df["Average Math Score"] = grouped_students_by_spending["math_score"].mean()
 
-SS_passing_math_pp_spending = merged_df2.loc[merged_df2["math_score"] >= 70]
+SS_passing_math_pp_spending = merged_df2.loc[merged_df2["math_score"] > 70]
 grouped_Ss_passing_math_pp_spending = SS_passing_math_pp_spending.groupby(["Per Pupil Spending"])
 Scores_by_pp_spending_df["% passing math"] = grouped_Ss_passing_math_pp_spending["Student ID"].count()/grouped_students_by_spending["Student ID"].count()*100
 
@@ -1318,34 +1320,34 @@ Scores_by_pp_spending_df
     <tr>
       <th>&lt;$597.25</th>
       <td>83.96</td>
-      <td>96.69%</td>
+      <td>93.45%</td>
       <td>83.36</td>
-      <td>93.70%</td>
-      <td>95.19%</td>
+      <td>90.33%</td>
+      <td>91.89%</td>
     </tr>
     <tr>
       <th>$597.25 to $616.50</th>
       <td>83.84</td>
-      <td>95.89%</td>
+      <td>92.47%</td>
       <td>83.53</td>
-      <td>94.12%</td>
-      <td>95.01%</td>
+      <td>90.53%</td>
+      <td>91.50%</td>
     </tr>
     <tr>
       <th>$616.50 to $635.75</th>
       <td>81.67</td>
-      <td>85.40%</td>
+      <td>82.51%</td>
       <td>78.48</td>
-      <td>72.77%</td>
-      <td>79.08%</td>
+      <td>70.34%</td>
+      <td>76.43%</td>
     </tr>
     <tr>
       <th>$635.75 to $655</th>
       <td>81.15</td>
-      <td>81.82%</td>
+      <td>79.18%</td>
       <td>77.42</td>
-      <td>68.34%</td>
-      <td>75.08%</td>
+      <td>66.03%</td>
+      <td>72.60%</td>
     </tr>
   </tbody>
 </table>
@@ -1372,13 +1374,13 @@ grouped_students_by_size = merged_df3.groupby(["Size"])
 
 Scores_by_size["Average Reading Score"] = grouped_students_by_size["reading_score"].mean()
 
-SS_passing_reading_by_size = merged_df3.loc[merged_df3["reading_score"] >= 70]
+SS_passing_reading_by_size = merged_df3.loc[merged_df3["reading_score"] > 70]
 grouped_Ss_passing_reading_by_size = SS_passing_reading_by_size.groupby(["Size"])
 Scores_by_size["% passing reading"] = grouped_Ss_passing_reading_by_size["Student ID"].count()/grouped_students_by_size["Student ID"].count()*100
 
 Scores_by_size["Average Math Score"] = grouped_students_by_size["math_score"].mean()
 
-SS_passing_math_by_size = merged_df3.loc[merged_df3["math_score"] >= 70]
+SS_passing_math_by_size = merged_df3.loc[merged_df3["math_score"] > 70]
 grouped_Ss_passing_math_by_size = SS_passing_math_by_size.groupby(["Size"])
 Scores_by_size["% passing math"] = grouped_Ss_passing_math_by_size["Student ID"].count()/grouped_students_by_size["Student ID"].count()*100
 
@@ -1433,26 +1435,26 @@ Scores_by_size
     <tr>
       <th>Small</th>
       <td>83.88</td>
-      <td>96.67%</td>
+      <td>93.13%</td>
       <td>83.44</td>
-      <td>93.66%</td>
-      <td>95.17%</td>
+      <td>90.13%</td>
+      <td>91.63%</td>
     </tr>
     <tr>
       <th>Medium</th>
       <td>81.65</td>
-      <td>83.84%</td>
+      <td>81.41%</td>
       <td>78.16</td>
-      <td>72.34%</td>
-      <td>78.09%</td>
+      <td>69.84%</td>
+      <td>75.62%</td>
     </tr>
     <tr>
       <th>Large</th>
       <td>80.93</td>
-      <td>81.11%</td>
+      <td>78.42%</td>
       <td>77.07</td>
-      <td>66.47%</td>
-      <td>73.79%</td>
+      <td>64.34%</td>
+      <td>71.38%</td>
     </tr>
   </tbody>
 </table>
@@ -1471,13 +1473,13 @@ grouped_students_by_type = merged_df4.groupby(["type"])
 
 Scores_by_school_type["Average Reading Score"] = grouped_students_by_type["reading_score"].mean()
 
-SS_passing_reading_by_type = merged_df4.loc[merged_df4["reading_score"] >= 70]
+SS_passing_reading_by_type = merged_df4.loc[merged_df4["reading_score"] > 70]
 grouped_Ss_passing_reading_by_type = SS_passing_reading_by_type.groupby(["type"])
 Scores_by_school_type["% passing reading"] = grouped_Ss_passing_reading_by_type["Student ID"].count()/grouped_students_by_type["Student ID"].count()*100
 
 Scores_by_school_type["Average Math Score"] = grouped_students_by_type["math_score"].mean()
 
-SS_passing_math_by_type = merged_df4.loc[merged_df4["math_score"] >= 70]
+SS_passing_math_by_type = merged_df4.loc[merged_df4["math_score"] > 70]
 grouped_Ss_passing_math_by_type = SS_passing_math_by_type.groupby(["type"])
 Scores_by_school_type["% passing math"] = grouped_Ss_passing_math_by_type["Student ID"].count()/grouped_students_by_type["Student ID"].count()*100
 
@@ -1534,18 +1536,18 @@ Scores_by_school_type
     <tr>
       <th>Charter</th>
       <td>83.90</td>
-      <td>96.65%</td>
+      <td>93.15%</td>
       <td>83.41</td>
-      <td>93.70%</td>
-      <td>95.17%</td>
+      <td>90.28%</td>
+      <td>91.72%</td>
     </tr>
     <tr>
       <th>District</th>
       <td>80.96</td>
-      <td>80.91%</td>
+      <td>78.37%</td>
       <td>76.99</td>
-      <td>66.52%</td>
-      <td>73.71%</td>
+      <td>64.31%</td>
+      <td>71.34%</td>
     </tr>
   </tbody>
 </table>
